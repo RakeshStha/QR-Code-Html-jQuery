@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Address Auto Complete in javascipt using google map api</title>
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      <meta charset="utf-8">
+    </head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <body>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3 text-center"  style="background-color:#e2e2e2;">
+        <h1>QR Code Generator</h1>
+
+          <div>
+              <p>Enter Text to embed in QR Code</p>
+              <p><textarea name="txt" style="height:50px;width:350px;" required="required"></textarea></p>
+              
+              <p>Image Size : <select name="size">
+                <option value="100x100" selected>100x100</option>
+                <option value="200x200">200x200</option>
+                <option value="300x300" >300x300</option>
+              </select></p>
+              <p><input type="submit" value="Generate QR Code" id="qr-gn"></p>
+          </div>
+
+    <br/>
+      <div id="qrcode"></div>
+
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
+<script>
+
+
+  $(function(){
+       $("#qr-gn").click(function(){
+       	   $("#qrcode").html("");
+           var txt = $.trim($('textarea[name="txt"]').val());
+           if(txt == '') {
+       	   	 alert("Please enter text you want to embed in OR Code");
+       	   	 return false;
+       	   }
+           var size = $('select[name="size"]').val();
+           var sizeSplit = size.split('x');
+           var width = sizeSplit[0];
+           var height = sizeSplit[1];
+           generateQRcode(width, height, txt );
+           return false;
+       });
+      
+	  function generateQRcode(width, height, text) {
+	  	 $('#qrcode').qrcode({width: width,height: height,text: text});
+	  }
+      
+  });
+
+  
+</script>
+
+</body>
+</html>
